@@ -1,0 +1,61 @@
+<html>
+<head>
+
+<script type="text/javascript">
+// author neo
+// kolodziejski.me
+// licensed under Creatives Common license
+// creativecommons.org/licenses/by-sa/2.0/pl/
+// as a cmp function you may choose natcompare from this website http://sourcefrog.net/projects/natsort/natcompare.js
+function cmp(a, b){
+	return a>b;
+}
+onl=(window.onload||new Function);
+onload=function(){
+	onl();
+	for(var i=0, e, tds=document.getElementsByTagName('td'); td=tds[i]; i++){
+		if(/\s?sort\s?/.test(td.className)){
+			td.n=i;
+			td.onclick=function(){sort(this.n,this);}
+		}
+	}
+}
+function sort(v,d){
+	d.o=d.o>0?-1:1;
+	var tbody=d.parentNode.parentNode.parentNode.getElementsByTagName('tbody')[0];
+	for(var i=0, c=[], tr, trs=tbody.getElementsByTagName('tr'); tr=trs[i]; i++){c[i]=tr} // just make an array from trs
+	c.sort(function(a,b){return cmp(a.getElementsByTagName('td')[v].firstChild.data,b.getElementsByTagName('td')[v].firstChild.data)>0?d.o:-d.o});
+	for(var i=0; i<c.length; i++){
+		tbody.appendChild(c[i]);
+	}
+}
+  </script>
+</head>
+<body>
+
+  <table>
+  <thead>
+   <tr><td class="sort inna_klasa">Ocena</td><td class="sort"> Imię</td><td>i nieklikalny nagłówek</td></tr>
+  </thead>
+   <tbody>
+   <tr><td>5</td><td>ñ</td><td>cokolwiek5</td></tr>
+   <tr><td>1</td><td>B</td><td>cokolwiek1</td></tr>
+   <tr><td>2</td><td>D</td><td>cokolwiek2</td></tr>
+   <tr><td>4</td><td>C</td><td>cok<em>neo</em>iek4</td></tr>
+   </tbody>
+  </table>
+
+ <table>
+ <thead>
+<tr><th class="ISort">Integer</th><th class="SSort">String</th><th class="SSort">Domyślne</th><th>Inne</th></tr>
+</thead>
+<tbody>
+<tr><td>2</td><td>A</td><td>2</td><td>Dodatkowe dane 1</td></tr>
+<tr><td>10</td><td>B</td><td>10</td><td>Dodatkowe dane 2</td></tr>
+<tr><td>3</td><td>G</td><td>3</td><td>Dodatkowe dane 3</td></tr>
+<tr><td>111</td><td>D</td><td>111</td><td>Dodatkowe dane 4</td></tr>
+</tbody>
+</table>
+
+</body>
+</html>
